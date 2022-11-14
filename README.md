@@ -10,7 +10,7 @@ Feel free to extend it to your own needs or sending pull requests.
 This library can be installed using composer
 
 ```
-composer require matthiasbayer/datadog-client
+composer require jonnx/datadog-client
 ```
 
 
@@ -168,6 +168,10 @@ Examples:
   $pointWithTimestamp = array(1234567, 20);
 ```
 
+## Origin of this package
+This is a re-upload of the original repository removed by the orignal author [Matthias Bayer](https://github.com/matthiasbayer). Class names and paths have been updated to submit this project to packagist. This ensures it can easily be installed using composer out of the box.
+
+Source: https://twitter.com/JonasWeigert/status/1590894486397538306
 
 
 

@@ -11,14 +11,9 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Matthias Bayer",
-            "email": "thematthiasbayer@gmail.com",
-            "homepage": "http://bayer.io"
-        },
-        {
             "name": "Jonas Weigert",
-            "email": "thematthiasbayer@gmail.com",
-            "homepage": "http://bayer.io"
+            "email": "weigert.jonas@gmail.com",
+            "homepage": "https://jonasweigert.com"
         }
     ],
     "require": {

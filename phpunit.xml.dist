@@ -12,7 +12,7 @@
          bootstrap="tests/bootstrap.php"
 >
     <testsuites>
-        <testsuite name="Bayer DataDogClient Test Suite">
+        <testsuite name="DataDogClient Test Suite">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>

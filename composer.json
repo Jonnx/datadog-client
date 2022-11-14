@@ -1,12 +1,22 @@
 {
-    "name": "matthiasbayer/datadog-client",
+    "name": "jonnx/datadog-client",
     "description": "Standalone DataDog PHP Client, works without datadog agent",
-    "keywords": ["datadog", "client", "http", "standalone"],
-    "homepage": "http://bayer.io",
+    "keywords": [
+        "datadog",
+        "client",
+        "http",
+        "standalone"
+    ],
+    "homepage": "https://github.com/jonnx/datadog-client",
     "license": "MIT",
     "authors": [
         {
             "name": "Matthias Bayer",
+            "email": "thematthiasbayer@gmail.com",
+            "homepage": "http://bayer.io"
+        },
+        {
+            "name": "Jonas Weigert",
             "email": "thematthiasbayer@gmail.com",
             "homepage": "http://bayer.io"
         }

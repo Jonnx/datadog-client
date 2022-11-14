@@ -1,7 +1,7 @@
 <?php
 
-namespace Bayer\DataDogClient\Factory;
+namespace Jonnx\DataDogClient\Factory;
 
-class InvalidPropertyException extends \Exception {
-
+class InvalidPropertyException extends \Exception
+{
 }

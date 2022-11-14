@@ -1,17 +1,20 @@
 <?php
 
-namespace Bayer\DataDogClient\Tests;
+namespace Jonnx\DataDogClient\Tests;
 
-use Bayer\DataDogClient\Series\Metric;
+use Jonnx\DataDogClient\Series\Metric;
 
-class MetricTest extends \PHPUnit_Framework_TestCase {
+class MetricTest extends \PHPUnit_Framework_TestCase
+{
 
-    public function testMetricName() {
+    public function testMetricName()
+    {
         $metric = new Metric('test.metric.name', array(20));
         $this->assertEquals('test.metric.name', $metric->getName());
     }
 
-    public function testMetricType() {
+    public function testMetricType()
+    {
         $metric = new Metric('test.metric.name', array(20));
         $this->assertEquals(Metric::TYPE_GAUGE, $metric->getType());
         $metric->setType(Metric::TYPE_COUNTER);
@@ -19,21 +22,24 @@ class MetricTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \Bayer\DataDogClient\Series\Metric\InvalidTypeException
+     * @expectedException \Jonnx\DataDogClient\Series\Metric\InvalidTypeException
      */
-    public function testInvalidMetricTypeThrowsException() {
+    public function testInvalidMetricTypeThrowsException()
+    {
         $metric = new Metric('test.metric.name', array(20));
         $metric->setType('foo');
     }
 
-    public function testMetricHost() {
+    public function testMetricHost()
+    {
         $metric = new Metric('test.metric.name', array(20));
         $this->assertNull($metric->getHost());
         $metric->setHost('foo.bar.com');
         $this->assertEquals('foo.bar.com', $metric->getHost());
     }
 
-    public function testMetricTags() {
+    public function testMetricTags()
+    {
         $metric = new Metric('test.metric.name', array(20));
         $this->assertEmpty($metric->getTags());
         $this->assertEquals(array(), $metric->getTags());
@@ -57,12 +63,14 @@ class MetricTest extends \PHPUnit_Framework_TestCase {
         $metric2->removeTags();
     }
 
-    public function testRemoveNonExistingTag() {
+    public function testRemoveNonExistingTag()
+    {
         $metric = new Metric('test.metric.name', array(20));
         $metric->removeTag('foo');
     }
 
-    public function testAddSinglePoint() {
+    public function testAddSinglePoint()
+    {
         $point = array(time(), 20);
 
         // Set point in constructor
@@ -89,7 +97,8 @@ class MetricTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($point, $metric4->getPoints()[0]);
     }
 
-    public function testAddMultiplePoints() {
+    public function testAddMultiplePoints()
+    {
         // Some testing points
         $points = array(
             array(time(), 20),
@@ -120,18 +129,20 @@ class MetricTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \Bayer\DataDogClient\Series\Metric\InvalidPointException
+     * @expectedException \Jonnx\DataDogClient\Series\Metric\InvalidPointException
      */
-    public function testInvalidPointTimestampThrowsException() {
+    public function testInvalidPointTimestampThrowsException()
+    {
         new Metric('test.metric.name', array(
             array('now', 20)
         ));
     }
 
     /**
-     * @expectedException \Bayer\DataDogClient\Series\Metric\InvalidPointException
+     * @expectedException \Jonnx\DataDogClient\Series\Metric\InvalidPointException
      */
-    public function testInvalidPointValueThrowsException() {
+    public function testInvalidPointValueThrowsException()
+    {
         new Metric('test.metric.name', array(
             array('20')
         ));

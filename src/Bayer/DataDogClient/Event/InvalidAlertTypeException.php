@@ -1,7 +1,7 @@
 <?php
 
-namespace Bayer\DataDogClient\Event;
+namespace Jonnx\DataDogClient\Event;
 
-class InvalidAlertTypeException extends \Exception {
-
+class InvalidAlertTypeException extends \Exception
+{
 }

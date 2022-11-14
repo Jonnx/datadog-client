@@ -1,11 +1,11 @@
 <?php
 
-namespace Bayer\DataDogClient;
+namespace Jonnx\DataDogClient;
 
-use Bayer\DataDogClient\Client\EmptyMetricException;
-use Bayer\DataDogClient\Client\EmptySeriesException;
-use Bayer\DataDogClient\Client\RequestException;
-use Bayer\DataDogClient\Series\Metric;
+use Jonnx\DataDogClient\Client\EmptyMetricException;
+use Jonnx\DataDogClient\Client\EmptySeriesException;
+use Jonnx\DataDogClient\Client\RequestException;
+use Jonnx\DataDogClient\Series\Metric;
 
 /**
  * Class Client
@@ -18,9 +18,10 @@ use Bayer\DataDogClient\Series\Metric;
  * Alternatively, you can use `Client::metric` or `Client::event` methods to send
  * data without having to build objects first.
  *
- * @package Bayer\DataDogClient
+ * @package Jonnx\DataDogClient
  */
-class Client {
+class Client
+{
 
     const ENDPOINT_EVENT  = 'https://app.datadoghq.com/api/v1/events?api_key=';
     const ENDPOINT_SERIES = 'https://app.datadoghq.com/api/v1/series?api_key=';
@@ -44,16 +45,17 @@ class Client {
      * @param string      $apiKey
      * @param null|string $applicationKey
      */
-    public function __construct($apiKey, $applicationKey = null) {
+    public function __construct($apiKey, $applicationKey = null)
+    {
         $this->apiKey         = $apiKey;
         $this->applicationKey = $applicationKey;
-
     }
 
     /**
      * @return string
      */
-    public function getApiKey() {
+    public function getApiKey()
+    {
         return $this->apiKey;
     }
 
@@ -62,7 +64,8 @@ class Client {
      *
      * @return Client
      */
-    public function setApiKey($apiKey) {
+    public function setApiKey($apiKey)
+    {
         $this->apiKey = $apiKey;
 
         return $this;
@@ -71,7 +74,8 @@ class Client {
     /**
      * @return string|null
      */
-    public function getApplicationKey() {
+    public function getApplicationKey()
+    {
         return $this->applicationKey;
     }
 
@@ -80,7 +84,8 @@ class Client {
      *
      * @return Client
      */
-    public function setApplicationKey($applicationKey) {
+    public function setApplicationKey($applicationKey)
+    {
         $this->applicationKey = $applicationKey;
 
         return $this;
@@ -94,7 +99,8 @@ class Client {
      *
      * @return Client
      */
-    public function sendSeries(Series $series) {
+    public function sendSeries(Series $series)
+    {
         $metrics = $series->getMetrics();
         if (empty($metrics)) {
             throw new EmptySeriesException('The series must contain metric data to send');
@@ -119,7 +125,8 @@ class Client {
      *
      * @return Client
      */
-    public function sendMetric(Metric $metric) {
+    public function sendMetric(Metric $metric)
+    {
         $points = $metric->getPoints();
         if (empty($points)) {
             throw new EmptyMetricException('The metric must contain points to send');
@@ -142,7 +149,8 @@ class Client {
      *
      * @return Client
      */
-    public function metric($name, array $points, array $options = array()) {
+    public function metric($name, array $points, array $options = array())
+    {
         return $this->sendMetric(
             Factory::buildMetric($name, $points, $options)
         );
@@ -160,7 +168,8 @@ class Client {
      *
      * @return Client
      */
-    public function event($text, $title = '', array $options = array()) {
+    public function event($text, $title = '', array $options = array())
+    {
         return $this->sendEvent(
             Factory::buildEvent($text, $title, $options)
         );
@@ -173,7 +182,8 @@ class Client {
      *
      * @return Client
      */
-    public function sendEvent(Event $event) {
+    public function sendEvent(Event $event)
+    {
         $this->send(
             self::ENDPOINT_EVENT . $this->getApiKey(),
             $event->toArray()
@@ -187,7 +197,8 @@ class Client {
      * @param $data
      * @throws Client\RequestException
      */
-    protected function send($url, $data) {
+    protected function send($url, $data)
+    {
         // Prepare request
         $session = curl_init();
         curl_setopt($session, CURLOPT_URL, $url);

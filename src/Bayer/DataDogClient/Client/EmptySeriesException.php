@@ -1,7 +1,7 @@
 <?php
 
-namespace Bayer\DataDogClient\Client;
+namespace Jonnx\DataDogClient\Client;
 
-class EmptySeriesException extends \Exception {
-
+class EmptySeriesException extends \Exception
+{
 }

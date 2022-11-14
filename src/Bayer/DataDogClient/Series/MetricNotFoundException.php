@@ -1,7 +1,7 @@
 <?php
 
-namespace Bayer\DataDogClient\Series;
+namespace Jonnx\DataDogClient\Series;
 
-class MetricNotFoundException extends \Exception {
-
+class MetricNotFoundException extends \Exception
+{
 }

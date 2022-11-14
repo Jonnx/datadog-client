@@ -1,7 +1,7 @@
 <?php
 
-namespace Bayer\DataDogClient\Client;
+namespace Jonnx\DataDogClient\Client;
 
-class RequestException extends \Exception {
-
+class RequestException extends \Exception
+{
 }

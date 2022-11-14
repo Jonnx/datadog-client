@@ -1,7 +1,7 @@
 <?php
 
-namespace Bayer\DataDogClient\Series\Metric;
+namespace Jonnx\DataDogClient\Series\Metric;
 
-class InvalidTypeException extends \Exception {
-
+class InvalidTypeException extends \Exception
+{
 }

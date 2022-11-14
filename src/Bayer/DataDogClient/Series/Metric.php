@@ -1,10 +1,10 @@
 <?php
 
-namespace Bayer\DataDogClient\Series;
+namespace Jonnx\DataDogClient\Series;
 
-use Bayer\DataDogClient\AbstractDataObject;
-use Bayer\DataDogClient\Series\Metric\InvalidPointException;
-use Bayer\DataDogClient\Series\Metric\InvalidTypeException;
+use Jonnx\DataDogClient\AbstractDataObject;
+use Jonnx\DataDogClient\Series\Metric\InvalidPointException;
+use Jonnx\DataDogClient\Series\Metric\InvalidTypeException;
 
 /**
  * Class Metric
@@ -14,9 +14,10 @@ use Bayer\DataDogClient\Series\Metric\InvalidTypeException;
  *
  * Please see Metric::addPoint for more details of the point structure
  *
- * @package Bayer\DataDogClient\Series
+ * @package Jonnx\DataDogClient\Series
  */
-class Metric extends AbstractDataObject {
+class Metric extends AbstractDataObject
+{
 
     const TYPE_GAUGE   = 'gauge';
     const TYPE_COUNTER = 'counter';
@@ -62,7 +63,8 @@ class Metric extends AbstractDataObject {
      * @param string $name
      * @param array  $points
      */
-    public function __construct($name, array $points) {
+    public function __construct($name, array $points)
+    {
         // Allow constructing with a single point
         if (isset($points[0]) && is_numeric($points[0])) {
             $points = array($points);
@@ -76,7 +78,8 @@ class Metric extends AbstractDataObject {
     /**
      * @return mixed
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -85,7 +88,8 @@ class Metric extends AbstractDataObject {
      *
      * @return Metric
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
 
         return $this;
@@ -94,7 +98,8 @@ class Metric extends AbstractDataObject {
     /**
      * @return string|null
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
@@ -104,7 +109,8 @@ class Metric extends AbstractDataObject {
      *
      * @return Metric
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         if (!$this->isValidType($type)) {
             throw new InvalidTypeException('Type must be one of Metric::TYPE_*');
         }
@@ -116,7 +122,8 @@ class Metric extends AbstractDataObject {
     /**
      * @return string|null
      */
-    public function getHost() {
+    public function getHost()
+    {
         return $this->host;
     }
 
@@ -125,7 +132,8 @@ class Metric extends AbstractDataObject {
      *
      * @return Metric
      */
-    public function setHost($host) {
+    public function setHost($host)
+    {
         $this->host = $host;
 
         return $this;
@@ -134,7 +142,8 @@ class Metric extends AbstractDataObject {
     /**
      * @return array
      */
-    public function getPoints() {
+    public function getPoints()
+    {
         return $this->points;
     }
 
@@ -143,7 +152,8 @@ class Metric extends AbstractDataObject {
      *
      * @return Metric
      */
-    public function setPoints(array $points) {
+    public function setPoints(array $points)
+    {
         $this->removePoints();
         $this->addPoints($points);
 
@@ -166,7 +176,8 @@ class Metric extends AbstractDataObject {
      *
      * @return Metric
      */
-    public function addPoint(array $point) {
+    public function addPoint(array $point)
+    {
         // Add timestamp if non provided
         if (!isset($point[1])) {
             $point = array(time(), $point[0]);
@@ -190,7 +201,8 @@ class Metric extends AbstractDataObject {
      *
      * @return Metric
      */
-    public function addPoints(array $points) {
+    public function addPoints(array $points)
+    {
         foreach ($points as $point) {
             $this->addPoint($point);
         }
@@ -201,7 +213,8 @@ class Metric extends AbstractDataObject {
     /**
      * @return Metric
      */
-    public function removePoints() {
+    public function removePoints()
+    {
         $this->points = array();
 
         return $this;
@@ -210,7 +223,8 @@ class Metric extends AbstractDataObject {
     /**
      * @return array
      */
-    public function toArray() {
+    public function toArray()
+    {
         $data = array(
             'metric' => $this->getName(),
             'type'   => $this->getType(),
@@ -237,7 +251,8 @@ class Metric extends AbstractDataObject {
      *
      * @return bool
      */
-    protected function isValidType($type) {
+    protected function isValidType($type)
+    {
         return in_array(
             $type,
             array(

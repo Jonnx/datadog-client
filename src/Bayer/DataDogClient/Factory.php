@@ -1,18 +1,19 @@
 <?php
 
-namespace Bayer\DataDogClient;
+namespace Jonnx\DataDogClient;
 
-use Bayer\DataDogClient\Factory\InvalidPropertyException;
-use Bayer\DataDogClient\Series\Metric;
+use Jonnx\DataDogClient\Factory\InvalidPropertyException;
+use Jonnx\DataDogClient\Series\Metric;
 
 /**
  * Class Factory
  *
  * Simple factory to build metric or event objects dynamically
  *
- * @package Bayer\DataDogClient
+ * @package Jonnx\DataDogClient
  */
-class Factory {
+class Factory
+{
     /**
      * @param string $name
      * @param array  $points
@@ -20,7 +21,8 @@ class Factory {
      *
      * @return Metric
      */
-    public static function buildMetric($name, array $points, array $options = array()) {
+    public static function buildMetric($name, array $points, array $options = array())
+    {
         $metric = new  Metric($name, $points);
 
         foreach ($options as $property => $value) {
@@ -37,7 +39,8 @@ class Factory {
      *
      * @return Event
      */
-    public static function buildEvent($text, $title = '', array $options = array()) {
+    public static function buildEvent($text, $title = '', array $options = array())
+    {
         $event = new Event($text, $title);
 
         foreach ($options as $property => $value) {
@@ -53,13 +56,14 @@ class Factory {
      * @param $value
      * @throws InvalidPropertyException
      */
-    protected static function setProperty($object, $property, $value) {
+    protected static function setProperty($object, $property, $value)
+    {
         $method = self::getMethodName($property);
 
         if (!method_exists($object, $method)) {
             throw new InvalidPropertyException('Unable to call ' . get_class(
-                    $object
-                ) . '::' . $method . '(' . $value . ')');
+                $object
+            ) . '::' . $method . '(' . $value . ')');
         }
         $object->$method($value);
     }
@@ -70,7 +74,8 @@ class Factory {
      * @param $string
      * @return mixed
      */
-    protected static function getMethodName($string) {
+    protected static function getMethodName($string)
+    {
         return 'set' . preg_replace_callback(
             '/_([a-z])/',
             function ($chunk) {

@@ -1,7 +1,7 @@
 <?php
 
-namespace Bayer\DataDogClient\Client;
+namespace Jonnx\DataDogClient\Client;
 
-class EmptyMetricException extends \Exception {
-
+class EmptyMetricException extends \Exception
+{
 }

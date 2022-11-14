@@ -1,13 +1,15 @@
 <?php
 
-namespace Bayer\DataDogClient\Tests;
+namespace Jonnx\DataDogClient\Tests;
 
-use Bayer\DataDogClient\Factory;
-use Bayer\DataDogClient\Event;
-use Bayer\DataDogClient\Series\Metric;
+use Jonnx\DataDogClient\Factory;
+use Jonnx\DataDogClient\Event;
+use Jonnx\DataDogClient\Series\Metric;
 
-class FactoryTest extends \PHPUnit_Framework_TestCase {
-    public function testFactoryCanCreateMetric() {
+class FactoryTest extends \PHPUnit_Framework_TestCase
+{
+    public function testFactoryCanCreateMetric()
+    {
         $metric = Factory::buildMetric(
             'test.metric.name',
             array(
@@ -25,10 +27,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('foo.bar.com', $metric->getHost());
         $this->assertEquals(array('foo' => 'bar'), $metric->getTags());
 
-        $this->assertInstanceOf('Bayer\DataDogClient\Series\Metric', $metric);
+        $this->assertInstanceOf('Jonnx\DataDogClient\Series\Metric', $metric);
     }
 
-    public function testFactoryCanCreateEvent() {
+    public function testFactoryCanCreateEvent()
+    {
         $event = Factory::buildEvent(
             'This is a dummy event',
             'My Event',
@@ -49,13 +52,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('foo.bar', $event->getAggregationKey());
         $this->assertEquals(array('foo' => 'bar'), $event->getTags());
 
-        $this->assertInstanceOf('Bayer\DataDogClient\Event', $event);
+        $this->assertInstanceOf('Jonnx\DataDogClient\Event', $event);
     }
 
     /**
-     * @expectedException \Bayer\DataDogClient\Factory\InvalidPropertyException
+     * @expectedException \Jonnx\DataDogClient\Factory\InvalidPropertyException
      */
-    public function testInvalidOptionThrowsException() {
+    public function testInvalidOptionThrowsException()
+    {
         Factory::buildEvent(
             'Dummy event',
             'My Event',

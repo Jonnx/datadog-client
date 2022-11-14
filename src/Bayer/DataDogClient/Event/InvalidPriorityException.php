@@ -1,7 +1,7 @@
 <?php
 
-namespace Bayer\DataDogClient\Event;
+namespace Jonnx\DataDogClient\Event;
 
-class InvalidPriorityException extends \Exception {
-
+class InvalidPriorityException extends \Exception
+{
 }

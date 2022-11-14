@@ -1,6 +1,6 @@
 <?php
 
-namespace Bayer\DataDogClient;
+namespace Jonnx\DataDogClient;
 
 /**
  * Class AbstractDataObject
@@ -8,9 +8,10 @@ namespace Bayer\DataDogClient;
  * This class defines all methods and properties that are the
  * same for every object that can be sent through the datadog API.
  *
- * @package Bayer\DataDogClient
+ * @package Jonnx\DataDogClient
  */
-abstract class AbstractDataObject implements TagContainerInterface {
+abstract class AbstractDataObject implements TagContainerInterface
+{
     /**
      * @inheritdoc
      */
@@ -19,14 +20,16 @@ abstract class AbstractDataObject implements TagContainerInterface {
     /**
      * @inheritdoc
      */
-    public function getTags() {
+    public function getTags()
+    {
         return $this->tags;
     }
 
     /**
      * @inheritdoc
      */
-    public function setTags($tags) {
+    public function setTags($tags)
+    {
         $this->tags = $tags;
 
         return $this;
@@ -35,7 +38,8 @@ abstract class AbstractDataObject implements TagContainerInterface {
     /**
      * @inheritdoc
      */
-    public function addTag($name, $value) {
+    public function addTag($name, $value)
+    {
         $this->tags[$name] = $value;
 
         return $this;
@@ -44,7 +48,8 @@ abstract class AbstractDataObject implements TagContainerInterface {
     /**
      * @inheritdoc
      */
-    public function removeTag($name) {
+    public function removeTag($name)
+    {
         if (isset($this->tags[$name])) {
             unset($this->tags[$name]);
         }
@@ -55,7 +60,8 @@ abstract class AbstractDataObject implements TagContainerInterface {
     /**
      * @inheritdoc
      */
-    public function removeTags() {
+    public function removeTags()
+    {
         $this->tags = array();
 
         return $this;

@@ -1,7 +1,7 @@
 <?php
 
-namespace Bayer\DataDogClient\Event;
+namespace Jonnx\DataDogClient\Event;
 
-class InvalidSourceTypeException extends \Exception {
-
+class InvalidSourceTypeException extends \Exception
+{
 }

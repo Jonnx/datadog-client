@@ -1,11 +1,13 @@
 <?php
 
-namespace Bayer\DataDogClient\Tests;
+namespace Jonnx\DataDogClient\Tests;
 
-use Bayer\DataDogClient\Event;
+use Jonnx\DataDogClient\Event;
 
-class EventTest extends \PHPUnit_Framework_TestCase {
-    public function testGetAndSetTitleAndText() {
+class EventTest extends \PHPUnit_Framework_TestCase
+{
+    public function testGetAndSetTitleAndText()
+    {
         $event = new Event('Text', 'Title');
         $this->assertEquals('Title', $event->getTitle());
         $this->assertEquals('Text', $event->getText());
@@ -17,7 +19,8 @@ class EventTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('NewText', $event->getText());
     }
 
-    public function testGetAndSetTimestamp() {
+    public function testGetAndSetTimestamp()
+    {
         $event = new Event('Text', 'Title');
         $this->assertEquals(time(), $event->getDateHappened());
 
@@ -25,7 +28,8 @@ class EventTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(123456789, $event->getDateHappened());
     }
 
-    public function testGetAndSetPriority() {
+    public function testGetAndSetPriority()
+    {
         $event = new Event('Text', 'Title');
         $this->assertEquals(Event::PRIORITY_NORMAL, $event->getPriority());
 
@@ -34,14 +38,16 @@ class EventTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \Bayer\DataDogClient\Event\InvalidPriorityException
+     * @expectedException \Jonnx\DataDogClient\Event\InvalidPriorityException
      */
-    public function testInvalidPriorityThrowsException() {
+    public function testInvalidPriorityThrowsException()
+    {
         $event = new Event('Text', 'Title');
         $event->setPriority('foo');
     }
 
-    public function testGetAndSetTags() {
+    public function testGetAndSetTags()
+    {
         $event = new Event('Text', 'Title');
         $this->assertEmpty($event->getTags());
         $this->assertEquals(array(), $event->getTags());
@@ -64,12 +70,14 @@ class EventTest extends \PHPUnit_Framework_TestCase {
         $event2->removeTags();
     }
 
-    public function testRemoveNonExistingTag() {
+    public function testRemoveNonExistingTag()
+    {
         $event = new Event('Text', 'Title');
         $event->removeTag('foo');
     }
 
-    public function testGetAndSetAlertType() {
+    public function testGetAndSetAlertType()
+    {
         $event = new Event('Text', 'Title');
 
         $this->assertEquals(Event::TYPE_INFO, $event->getAlertType());
@@ -79,14 +87,16 @@ class EventTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \Bayer\DataDogClient\Event\InvalidAlertTypeException
+     * @expectedException \Jonnx\DataDogClient\Event\InvalidAlertTypeException
      */
-    public function testInvalidTypeThrowsException() {
+    public function testInvalidTypeThrowsException()
+    {
         $event = new Event('Text', 'Title');
         $event->setAlertType('foo');
     }
 
-    public function testGetAndSetAggregationKey() {
+    public function testGetAndSetAggregationKey()
+    {
         $event = new Event('Text', 'Title');
         $this->assertNull($event->getAggregationKey());
 
@@ -94,7 +104,8 @@ class EventTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('test', $event->getAggregationKey());
     }
 
-    public function testGetAndSetSourceType() {
+    public function testGetAndSetSourceType()
+    {
         $event = new Event('Text', 'Title');
         $this->assertNull($event->getSourceTypeName());
 
@@ -103,9 +114,10 @@ class EventTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \Bayer\DataDogClient\Event\InvalidSourceTypeException
+     * @expectedException \Jonnx\DataDogClient\Event\InvalidSourceTypeException
      */
-    public function testInvalidSourceTypeThrowsException() {
+    public function testInvalidSourceTypeThrowsException()
+    {
         $event = new Event('Text', 'Title');
         $event->setSourceTypeName('foo');
     }

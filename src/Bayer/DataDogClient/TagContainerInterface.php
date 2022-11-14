@@ -1,15 +1,16 @@
 <?php
 
-namespace Bayer\DataDogClient;
+namespace Jonnx\DataDogClient;
 
 /**
  * Interface TagContainerInterface
  *
  * Should be implemented by classes which can contain tags
  *
- * @package Bayer\DataDogClient
+ * @package Jonnx\DataDogClient
  */
-interface TagContainerInterface {
+interface TagContainerInterface
+{
     /**
      * Get all tags
      *

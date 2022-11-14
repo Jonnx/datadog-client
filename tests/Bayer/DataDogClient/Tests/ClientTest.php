@@ -1,13 +1,14 @@
 <?php
 
-namespace Bayer\DataDogClient\Tests;
+namespace Jonnx\DataDogClient\Tests;
 
-use Bayer\DataDogClient\Client;
-use Bayer\DataDogClient\Event;
-use Bayer\DataDogClient\Series;
-use Bayer\DataDogClient\Series\Metric;
+use Jonnx\DataDogClient\Client;
+use Jonnx\DataDogClient\Event;
+use Jonnx\DataDogClient\Series;
+use Jonnx\DataDogClient\Series\Metric;
 
-class ClientTest extends \PHPUnit_Framework_TestCase {
+class ClientTest extends \PHPUnit_Framework_TestCase
+{
 
     const API_KEY = 'test';
     const APP_KEY = 'test';
@@ -17,28 +18,33 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
      */
     protected $client;
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->client = new Client(self::API_KEY, self::APP_KEY);
     }
 
-    public function testConstructor() {
+    public function testConstructor()
+    {
         $client = new Client(self::API_KEY);
-        $this->assertInstanceOf('Bayer\DataDogClient\Client', $client);
+        $this->assertInstanceOf('Jonnx\DataDogClient\Client', $client);
     }
 
-    public function testGetAndSetApiKey() {
+    public function testGetAndSetApiKey()
+    {
         $this->assertEquals(self::API_KEY, $this->client->getApiKey());
         $this->client->setApiKey('test_api_key');
         $this->assertEquals('test_api_key', $this->client->getApiKey());
     }
 
-    public function testGetAndSetApplicationKey() {
+    public function testGetAndSetApplicationKey()
+    {
         $this->assertEquals(self::APP_KEY, $this->client->getApplicationKey());
         $this->client->setApplicationKey('test_app_key');
         $this->assertEquals('test_app_key', $this->client->getApplicationKey());
     }
 
-    public function testSendSeries() {
+    public function testSendSeries()
+    {
         $series  = new Series();
         $metric1 = new Metric('test.metric.name', array(
             array(time(), 20),
@@ -63,7 +69,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
         $this->client->sendSeries($series);
     }
 
-    public function testSendEvent() {
+    public function testSendEvent()
+    {
         $event = new Event('TestEvent', 'This is a testevent');
         $event->addTag('foo', 'bar')
             ->setAlertType(Event::TYPE_SUCCESS)
@@ -74,7 +81,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
         $this->client->sendEvent($event);
     }
 
-    public function testSendMetric() {
+    public function testSendMetric()
+    {
         $metric1 = new Metric('test.metric.name', array(
             array(time(), 20),
             array(time() - 5, 15),
@@ -84,21 +92,24 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
         $this->client->sendMetric($metric1);
     }
 
-    public function testCreatingMetricWithEmptyPointArray() {
+    public function testCreatingMetricWithEmptyPointArray()
+    {
         $metric = new Metric('test.metric.name', array());
         $this->assertEmpty($metric->getPoints());
     }
 
     /**
-     * @expectedException \Bayer\DataDogClient\Client\EmptyMetricException
+     * @expectedException \Jonnx\DataDogClient\Client\EmptyMetricException
      */
-    public function testSendingEmptyMetricThrowsException() {
+    public function testSendingEmptyMetricThrowsException()
+    {
         $metric = new Metric('test.metric.name', array(20));
         $metric->removePoints();
         $this->client->sendMetric($metric);
     }
 
-    public function testSendMetricWithShortcutMethod() {
+    public function testSendMetricWithShortcutMethod()
+    {
         $this->client->metric(
             'shortcut.metric',
             array(
@@ -120,7 +131,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
         );
     }
 
-    public function testSendEventWithShortcutMethod() {
+    public function testSendEventWithShortcutMethod()
+    {
         $this->client->event('Test Event', 'My Event');
 
         $this->client->event(
@@ -134,9 +146,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \Bayer\DataDogClient\Client\EmptySeriesException
+     * @expectedException \Jonnx\DataDogClient\Client\EmptySeriesException
      */
-    public function testDoNotSendEmptySeries() {
+    public function testDoNotSendEmptySeries()
+    {
         $series = new Series();
 
         $this->client->sendSeries($series);

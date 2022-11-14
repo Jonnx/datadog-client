@@ -1,9 +1,9 @@
 <?php
 
-namespace Bayer\DataDogClient;
+namespace Jonnx\DataDogClient;
 
-use Bayer\DataDogClient\Series\Metric;
-use Bayer\DataDogClient\Series\MetricNotFoundException;
+use Jonnx\DataDogClient\Series\Metric;
+use Jonnx\DataDogClient\Series\MetricNotFoundException;
 
 /**
  * Class Series
@@ -12,9 +12,10 @@ use Bayer\DataDogClient\Series\MetricNotFoundException;
  * in a series. A series is a simple container for one
  * or more metric objects.
  *
- * @package Bayer\DataDogClient
+ * @package Jonnx\DataDogClient
  */
-class Series {
+class Series
+{
     /**
      * Metrics in this series
      *
@@ -25,7 +26,8 @@ class Series {
     /**
      * @param Metric|Metric[] $metrics
      */
-    public function __construct($metrics = array()) {
+    public function __construct($metrics = array())
+    {
         if ($metrics instanceof Metric) {
             $metrics = array($metrics);
         }
@@ -35,7 +37,8 @@ class Series {
     /**
      * @return Metric[]
      */
-    public function getMetrics() {
+    public function getMetrics()
+    {
         return $this->metrics;
     }
 
@@ -45,7 +48,8 @@ class Series {
      *
      * @return Metric
      */
-    public function getMetric($name) {
+    public function getMetric($name)
+    {
         if (isset($this->metrics[$name])) {
             return $this->metrics[$name];
         }
@@ -58,7 +62,8 @@ class Series {
      *
      * @return Series
      */
-    public function setMetrics(array $metrics) {
+    public function setMetrics(array $metrics)
+    {
         $this->removeMetrics();
         $this->addMetrics($metrics);
 
@@ -70,13 +75,15 @@ class Series {
      *
      * @return Series
      */
-    public function addMetric(Metric $metric) {
+    public function addMetric(Metric $metric)
+    {
         $this->metrics[$metric->getName()] = $metric;
 
         return $this;
     }
 
-    public function addMetrics(array $metrics) {
+    public function addMetrics(array $metrics)
+    {
         foreach ($metrics as $metric) {
             $this->addMetric($metric);
         }
@@ -90,7 +97,8 @@ class Series {
      *
      * @return Series
      */
-    public function removeMetric($name) {
+    public function removeMetric($name)
+    {
         if (isset($this->metrics[$name])) {
             unset($this->metrics[$name]);
 
@@ -103,7 +111,8 @@ class Series {
     /**
      * @return Series
      */
-    public function removeMetrics() {
+    public function removeMetrics()
+    {
         $this->metrics = array();
 
         return $this;
@@ -112,7 +121,8 @@ class Series {
     /**
      * @return array
      */
-    public function toArray() {
+    public function toArray()
+    {
         $data = array();
         foreach ($this->getMetrics() as $metric) {
             /** @var Metric $metric */

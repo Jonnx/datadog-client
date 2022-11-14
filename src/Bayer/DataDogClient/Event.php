@@ -1,10 +1,10 @@
 <?php
 
-namespace Bayer\DataDogClient;
+namespace Jonnx\DataDogClient;
 
-use Bayer\DataDogClient\Event\InvalidAlertTypeException;
-use Bayer\DataDogClient\Event\InvalidSourceTypeException;
-use Bayer\DataDogClient\Event\InvalidPriorityException;
+use Jonnx\DataDogClient\Event\InvalidAlertTypeException;
+use Jonnx\DataDogClient\Event\InvalidSourceTypeException;
+use Jonnx\DataDogClient\Event\InvalidPriorityException;
 
 /**
  * Class Event
@@ -12,9 +12,10 @@ use Bayer\DataDogClient\Event\InvalidPriorityException;
  * An event is shown in the datadog timeline and consists of
  * at least an event text.
  *
- * @package Bayer\DataDogClient
+ * @package Jonnx\DataDogClient
  */
-class Event extends AbstractDataObject {
+class Event extends AbstractDataObject
+{
 
     const PRIORITY_NORMAL = 'normal';
     const PRIORITY_LOW    = 'low';
@@ -99,7 +100,8 @@ class Event extends AbstractDataObject {
      * @param string $text
      * @param string $title
      */
-    public function __construct($text, $title = '') {
+    public function __construct($text, $title = '')
+    {
         $this->setText($text)
             ->setTitle($title)
             ->setDateHappened(time())
@@ -110,7 +112,8 @@ class Event extends AbstractDataObject {
     /**
      * @return string
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
@@ -119,7 +122,8 @@ class Event extends AbstractDataObject {
      *
      * @return Event
      */
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         $this->title = $title;
 
         return $this;
@@ -128,7 +132,8 @@ class Event extends AbstractDataObject {
     /**
      * @return string
      */
-    public function getText() {
+    public function getText()
+    {
         return $this->text;
     }
 
@@ -137,7 +142,8 @@ class Event extends AbstractDataObject {
      *
      * @return Event
      */
-    public function setText($text) {
+    public function setText($text)
+    {
         $this->text = $text;
 
         return $this;
@@ -146,7 +152,8 @@ class Event extends AbstractDataObject {
     /**
      * @return int
      */
-    public function getDateHappened() {
+    public function getDateHappened()
+    {
         return $this->dateHappened;
     }
 
@@ -155,7 +162,8 @@ class Event extends AbstractDataObject {
      *
      * @return Event
      */
-    public function setDateHappened($timestamp) {
+    public function setDateHappened($timestamp)
+    {
         $this->dateHappened = $timestamp;
 
         return $this;
@@ -164,7 +172,8 @@ class Event extends AbstractDataObject {
     /**
      * @return mixed
      */
-    public function getPriority() {
+    public function getPriority()
+    {
         return $this->priority;
     }
 
@@ -174,7 +183,8 @@ class Event extends AbstractDataObject {
      *
      * @return Event
      */
-    public function setPriority($priority) {
+    public function setPriority($priority)
+    {
         if (!$this->isValidPriority($priority)) {
             throw new InvalidPriorityException('Priority must be on of Event::PRIORITY_*');
         }
@@ -186,7 +196,8 @@ class Event extends AbstractDataObject {
     /**
      * @return mixed
      */
-    public function getAlertType() {
+    public function getAlertType()
+    {
         return $this->alertType;
     }
 
@@ -196,7 +207,8 @@ class Event extends AbstractDataObject {
      *
      * @return Event
      */
-    public function setAlertType($type) {
+    public function setAlertType($type)
+    {
         if (!$this->isValidType($type)) {
             throw new InvalidAlertTypeException('Type must be one of Event::TYPE_*');
         }
@@ -208,7 +220,8 @@ class Event extends AbstractDataObject {
     /**
      * @return mixed
      */
-    public function getAggregationKey() {
+    public function getAggregationKey()
+    {
         return $this->aggregationKey;
     }
 
@@ -217,7 +230,8 @@ class Event extends AbstractDataObject {
      *
      * @return Event
      */
-    public function setAggregationKey($aggregationKey) {
+    public function setAggregationKey($aggregationKey)
+    {
         $this->aggregationKey = $aggregationKey;
 
         return $this;
@@ -226,7 +240,8 @@ class Event extends AbstractDataObject {
     /**
      * @return mixed
      */
-    public function getSourceTypeName() {
+    public function getSourceTypeName()
+    {
         return $this->sourceTypeName;
     }
 
@@ -236,7 +251,8 @@ class Event extends AbstractDataObject {
      *
      * @return Event
      */
-    public function setSourceTypeName($sourceType) {
+    public function setSourceTypeName($sourceType)
+    {
         if (!$this->isValidSourceType($sourceType)) {
             throw new InvalidSourceTypeException('SourceTyoe must be on of Event::SOURCE_*');
         }
@@ -248,7 +264,8 @@ class Event extends AbstractDataObject {
     /**
      * @return array
      */
-    public function toArray() {
+    public function toArray()
+    {
         $data = array(
             'title'         => $this->getTitle(),
             'text'          => $this->getText(),
@@ -275,7 +292,8 @@ class Event extends AbstractDataObject {
         return $data;
     }
 
-    protected function isValidType($type) {
+    protected function isValidType($type)
+    {
         return in_array(
             $type,
             array(
@@ -287,7 +305,8 @@ class Event extends AbstractDataObject {
         );
     }
 
-    protected function isValidSourceType($sourceType) {
+    protected function isValidSourceType($sourceType)
+    {
         return in_array(
             $sourceType,
             array(
@@ -307,7 +326,8 @@ class Event extends AbstractDataObject {
         );
     }
 
-    protected function isValidPriority($priority) {
+    protected function isValidPriority($priority)
+    {
         return in_array(
             $priority,
             array(
@@ -316,5 +336,4 @@ class Event extends AbstractDataObject {
             )
         );
     }
-
 }
